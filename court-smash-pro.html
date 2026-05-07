@@ -5,11 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>COURT × SMASH PRO — Propuesta de Colaboración Técnica</title>
 
-  <!-- Chakra Petch: display/headings — technical, angular, motorsport-inspired -->
-  <!-- Jost: body — geometric sans, clean, modern -->
+  <!-- Ethnocentric: logo COURT — futuristic, angular, brand identity -->
+  <!-- Exo 2: display + body — technological, elegant, pro -->
+  <!-- Orbitron: fallback for Ethnocentric -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.cdnfonts.com/css/ethnocentric" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Orbitron:wght@700;900&display=swap" rel="stylesheet" />
 
   <style>
     /* ============================================================
@@ -24,15 +26,18 @@
       --text-secondary:#787878;
       --text-dim:      #3C3C3C;
 
-      --accent:        #FF4500;
-      --accent-dim:    rgba(255,69,0,0.10);
-      --accent-glow:   rgba(255,69,0,0.28);
+      --accent:        #d8d8d8;
+      --accent-dim:    rgba(216,216,216,0.07);
+      --accent-glow:   rgba(216,216,216,0.18);
 
       --border:        rgba(255,255,255,0.06);
-      --border-accent: rgba(255,69,0,0.38);
+      --border-accent: rgba(216,216,216,0.22);
 
-      --font-display: 'Chakra Petch', sans-serif;
-      --font-body:    'Jost', sans-serif;
+      /* Brand font: Ethnocentric for COURT logo marks */
+      --font-brand:   'Ethnocentric Rg', 'Orbitron', sans-serif;
+      /* Display/body: Exo 2 — technological, elegant, pro */
+      --font-display: 'Exo 2', sans-serif;
+      --font-body:    'Exo 2', sans-serif;
 
       /* All sizes via clamp — never fixed px outside clamp() */
       --title-size:  clamp(1.9rem, 5.2vw, 4.8rem);
@@ -150,7 +155,23 @@
       pointer-events:none;
       z-index:0;
     }
-    .slide > * { position:relative; z-index:1; }
+    .slide > *:not(.vid-bg) { position:relative; z-index:1; }
+
+    /* ============================================================
+       VIDEO BACKGROUND — loop behind slide content
+       Para agregar un video: coloca el archivo .mp4 en la misma
+       carpeta y actualiza el src del elemento <video> en cada slide.
+       Ajusta opacity para más o menos presencia visual (0.10–0.30).
+       ============================================================ */
+    .vid-bg {
+      position:absolute;
+      inset:0;
+      width:100%; height:100%;
+      object-fit:cover;
+      opacity:0.18;
+      z-index:0;
+      pointer-events:none;
+    }
 
     /* ============================================================
        CHROME — progress bar, counter, brand, dots, arrows
@@ -180,7 +201,7 @@
       position:fixed;
       top: clamp(0.8rem,2vh,1.5rem);
       left: clamp(1rem,3vw,2.5rem);
-      font-family:var(--font-display);
+      font-family:var(--font-brand);
       font-size:var(--small-size);
       font-weight:700;
       letter-spacing:0.18em;
@@ -362,7 +383,7 @@
     .s1::after {
       content:'';
       position:absolute; inset:0;
-      background: radial-gradient(ellipse at 80% 50%, rgba(255,69,0,0.07) 0%, transparent 55%);
+      background: radial-gradient(ellipse at 80% 50%, rgba(216,216,216,0.04) 0%, transparent 55%);
       pointer-events:none; z-index:0;
     }
 
@@ -378,7 +399,7 @@
     .s1-left { display:flex; flex-direction:column; gap:var(--el-gap); }
 
     .hero-title {
-      font-family:var(--font-display);
+      font-family:var(--font-brand);
       font-size:var(--title-size);
       font-weight:700;
       letter-spacing:-0.015em;
@@ -538,7 +559,7 @@
       width:7px; height:7px;
       border-radius:50%;
       border:1.5px solid var(--accent);
-      background:rgba(255,69,0,0.35);
+      background:rgba(216,216,216,0.2);
       flex-shrink:0;
     }
     .co-line {
@@ -750,7 +771,7 @@
     .s6-bg {
       position:absolute; inset:0;
       background:
-        radial-gradient(ellipse at 35% 55%, rgba(255,69,0,0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 35% 55%, rgba(216,216,216,0.04) 0%, transparent 50%),
         radial-gradient(ellipse at 75% 25%, rgba(255,255,255,0.025) 0%, transparent 40%);
       z-index:0;
     }
@@ -821,7 +842,7 @@
     }
 
     .s6-logo {
-      font-family:var(--font-display);
+      font-family:var(--font-brand);
       font-size: clamp(0.85rem,1.9vw,1.4rem);
       font-weight:700;
       letter-spacing:0.22em;
@@ -868,7 +889,7 @@
     .edit-banner.active { opacity:1; pointer-events:auto; }
 
     body.edit-active [contenteditable] {
-      outline:1px dashed rgba(255,69,0,0.45);
+      outline:1px dashed rgba(216,216,216,0.4);
       cursor:text;
     }
   </style>
@@ -901,6 +922,10 @@
      SLIDE 1 — HERO
      ════════════════════════════════════════════════════════ -->
 <section class="slide s1" id="slide-1">
+  <!-- VIDEO FONDO SLIDE 1: reemplaza src con tu archivo, ej: src="video-s1.mp4" -->
+  <video class="vid-bg" autoplay muted loop playsinline>
+    <source src="" type="video/mp4">
+  </video>
   <div class="s1-layout">
 
     <div class="s1-left">
@@ -939,6 +964,10 @@
      SLIDE 2 — SMASH PRO: CALZADO PARA JUEGO INTENSIVO
      ════════════════════════════════════════════════════════ -->
 <section class="slide s2" id="slide-2">
+  <!-- VIDEO FONDO SLIDE 2: reemplaza src con tu archivo, ej: src="video-s2.mp4" -->
+  <video class="vid-bg" autoplay muted loop playsinline>
+    <source src="" type="video/mp4">
+  </video>
   <div class="s2-layout">
 
     <div class="s2-left">
@@ -977,6 +1006,10 @@
      en la misma carpeta que este archivo HTML.
      ════════════════════════════════════════════════════════ -->
 <section class="slide s3" id="slide-3">
+  <!-- VIDEO FONDO SLIDE 3: reemplaza src con tu archivo, ej: src="video-s3.mp4" -->
+  <video class="vid-bg" autoplay muted loop playsinline>
+    <source src="" type="video/mp4">
+  </video>
   <div class="s3-layout">
 
     <!-- ── Izquierda: imágenes de suela con callouts ── -->
@@ -1085,6 +1118,10 @@
      SLIDE 4 — TECNOLOGÍA DE CANCHA CON ENFOQUE PREMIUM
      ════════════════════════════════════════════════════════ -->
 <section class="slide s4" id="slide-4">
+  <!-- VIDEO FONDO SLIDE 4: reemplaza src con tu archivo, ej: src="video-s4.mp4" -->
+  <video class="vid-bg" autoplay muted loop playsinline>
+    <source src="" type="video/mp4">
+  </video>
   <div class="s4-layout">
 
     <div class="s4-left">
@@ -1124,6 +1161,10 @@
      SLIDE 5 — ALCANCE DE LA COLABORACIÓN
      ════════════════════════════════════════════════════════ -->
 <section class="slide s5" id="slide-5">
+  <!-- VIDEO FONDO SLIDE 5: reemplaza src con tu archivo, ej: src="video-s5.mp4" -->
+  <video class="vid-bg" autoplay muted loop playsinline>
+    <source src="" type="video/mp4">
+  </video>
   <div class="s5-layout">
 
     <div class="s5-head">
@@ -1171,6 +1212,10 @@
      SLIDE 6 — CIERRE
      ════════════════════════════════════════════════════════ -->
 <section class="slide s6" id="slide-6">
+  <!-- VIDEO FONDO SLIDE 6: reemplaza src con tu archivo, ej: src="video-s6.mp4" -->
+  <video class="vid-bg" autoplay muted loop playsinline>
+    <source src="" type="video/mp4">
+  </video>
   <div class="s6-bg"></div>
   <!-- Imagen de cierre como fondo: descomenta cuando tengas el archivo
   <img src="image-closing-court.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.13;z-index:0;" />
