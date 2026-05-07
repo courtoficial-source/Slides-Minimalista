@@ -31,13 +31,13 @@
       --font-display: 'Exo 2', sans-serif;
       --font-body:    'Exo 2', sans-serif;
 
-      /* Typography — titles 50pt, subtitles 20pt, body 10pt */
-      --title-size:  clamp(2.5rem, 3.5vw, 4.5rem);
-      --h2-size:     clamp(1rem, 1.4vw, 1.75rem);
-      --h3-size:     clamp(0.9rem, 1.1vw, 1.3rem);
-      --body-size:   clamp(0.75rem, 0.7vw, 0.875rem);
-      --small-size:  clamp(0.65rem, 0.8vw, 1rem);
-      --label-size:  clamp(0.5rem, 0.55vw, 0.7rem);
+      /* Typography — titles 70pt, subtitles 50pt, body 25pt */
+      --title-size:  clamp(2.5rem, 4.86vw, 5.8rem);
+      --h2-size:     clamp(1.8rem, 3.47vw, 4.2rem);
+      --h3-size:     clamp(1.3rem, 2.5vw,  3rem);
+      --body-size:   clamp(1rem,   1.73vw, 2.1rem);
+      --small-size:  clamp(0.9rem, 1.25vw, 1.5rem);
+      --label-size:  clamp(0.7rem, 0.83vw, 1rem);
 
       /* Chrome UI stays small regardless of body size */
       --chrome-size: clamp(0.6rem, 0.8vw, 0.85rem);
@@ -86,12 +86,17 @@
       :root {
         --slide-padding: clamp(0.75rem,3vw,2rem);
         --content-gap:   clamp(0.4rem,1.5vw,1rem);
-        --title-size:    clamp(2rem,3vw,3.5rem);
-        --h2-size:       clamp(0.9rem,1.2vw,1.5rem);
+        --title-size:    clamp(2rem,4vw,3.8rem);
+        --h2-size:       clamp(1.4rem,2.5vw,2.6rem);
+        --body-size:     clamp(0.85rem,1.2vw,1.4rem);
       }
     }
     @media (max-height:500px) {
-      :root { --title-size:clamp(1.5rem,2.5vw,2.5rem); --h2-size:clamp(0.85rem,1vw,1.2rem); }
+      :root {
+        --title-size:  clamp(1.5rem,3.5vw,2.5rem);
+        --h2-size:     clamp(1.1rem,2vw,1.8rem);
+        --body-size:   clamp(0.75rem,1vw,1.1rem);
+      }
     }
     @media (prefers-reduced-motion:reduce) {
       *, *::before, *::after { animation-duration:0.01ms !important; transition-duration:0.2s !important; }
@@ -118,7 +123,7 @@
       background-size: 56px 56px;
       pointer-events:none; z-index:0;
     }
-    .slide > *:not(.vid-bg) { position:relative; z-index:1; }
+    .slide > *:not(.vid-bg):not(.img-bg) { position:relative; z-index:1; }
 
     /* ============================================================
        VIDEO BACKGROUND
@@ -199,7 +204,24 @@
     }
     .slide.visible .reveal-photo { opacity:1; transform:scale(1); filter:brightness(1) saturate(1); }
 
-    /* Bullet slide-in from left — slides 2, 5 */
+    /* Zoom + blur reveal — slides 2, 3 headings */
+    .reveal-zoom {
+      opacity:0; transform:scale(0.93);
+      filter:blur(8px);
+      transition: opacity 0.85s var(--ease-expo),
+                  transform 0.85s var(--ease-expo),
+                  filter 0.85s ease;
+    }
+    .slide.visible .reveal-zoom { opacity:1; transform:scale(1); filter:blur(0); }
+
+    /* Slide from right — slide 3 heading alternative */
+    .reveal-right {
+      opacity:0; transform:translateX(40px);
+      transition: opacity 0.7s var(--ease-expo), transform 0.7s var(--ease-expo);
+    }
+    .slide.visible .reveal-right { opacity:1; transform:translateX(0); }
+
+    /* Bullet slide-in from left — slides 2, 3, 5 */
     .bullet-in {
       opacity:0; transform:translateX(-50px);
       transition: opacity 0.55s var(--ease-expo), transform 0.55s var(--ease-expo);
@@ -268,7 +290,7 @@
     .s1-court {
       font-family:var(--font-brand);
       font-size:var(--title-size);
-      font-weight:700; letter-spacing:0.15em;
+      font-weight:700;
       color:var(--text-primary); line-height:1; text-align:center;
     }
 
@@ -279,9 +301,9 @@
 
     /* Slide 1 entrance animations */
     @keyframes court-reveal {
-      0%   { opacity:0; letter-spacing:0.8em; filter:blur(14px); }
-      55%  { filter:blur(0px); opacity:0.95; }
-      100% { opacity:1; letter-spacing:0.15em; filter:blur(0); }
+      0%   { opacity:0; transform:scale(1.15) translateY(-24px); filter:blur(16px); }
+      55%  { filter:blur(0px); }
+      100% { opacity:1; transform:scale(1) translateY(0); filter:blur(0); }
     }
     @keyframes line-expand {
       0%   { opacity:0; transform:scaleX(0) translateX(-10px); }
@@ -424,9 +446,9 @@
       border-bottom:1px solid var(--border-accent);
     }
     .comp-head-cell {
-      font-family:var(--font-display); font-size:var(--label-size);
-      font-weight:700; text-transform:uppercase; letter-spacing:0.15em;
-      padding:clamp(6px,1vh,12px) clamp(10px,2vw,24px); color:var(--text-dim);
+      font-family:var(--font-display); font-size:var(--small-size);
+      font-weight:700; text-transform:uppercase; letter-spacing:0.1em;
+      padding:clamp(8px,1.2vh,16px) clamp(12px,2vw,28px); color:var(--text-dim);
     }
     .comp-head-cell:last-child { color:var(--accent); border-left:1px solid var(--border-accent); }
 
@@ -440,13 +462,21 @@
 
     .comp-cell {
       font-family:var(--font-display); font-size:var(--body-size);
-      padding:clamp(8px,1.2vh,16px) clamp(10px,2vw,24px);
+      padding:clamp(10px,1.5vh,22px) clamp(12px,2vw,28px);
       color:var(--text-secondary); line-height:1.2;
       display:flex; align-items:center;
     }
     .comp-cell:first-child { color:var(--text-primary); }
     .comp-cell:last-child { border-left:1px solid rgba(255,255,255,0.04); }
     .comp-cell strong { color:var(--accent); }
+
+    /* Image background — slide 5 */
+    .img-bg {
+      position:absolute; inset:0;
+      width:100%; height:100%; max-height:none !important;
+      object-fit:cover; object-position:center top;
+      opacity:0.18; z-index:0; pointer-events:none;
+    }
 
     /* ============================================================
        SLIDE 5 — COLLABORATION SCOPE: bullet-in per item
@@ -680,11 +710,11 @@
      ════════════════════════════════════════════════════════ -->
 <section class="slide s2" id="slide-2">
   <video class="vid-bg" autoplay muted loop playsinline>
-    <source src="Detalle_Smash_negro_azul.mp4" type="video/mp4">
+    <source src="Detalle_Smash_rosa.mp4" type="video/mp4">
   </video>
   <div class="s2-full">
     <div class="accent-line reveal d1"></div>
-    <h2 class="slide-h reveal d2">SMASH PRO<br>Calzado para juego intensivo</h2>
+    <h2 class="slide-h reveal-zoom d2">SMASH PRO<br>Calzado para juego intensivo</h2>
     <ul class="bullet-list">
       <li class="bullet-in d3">Suela con alta resistencia a la abrasión</li>
       <li class="bullet-in d4">Tracción multidireccional</li>
@@ -752,12 +782,12 @@
 
     <div class="s3-right">
       <div class="accent-line reveal d1"></div>
-      <h2 class="s3-h reveal d2">Suela SMASH PRO<br>Tracción, resistencia<br>y control</h2>
+      <h2 class="s3-h reveal-zoom d2">Suela SMASH PRO<br>Tracción, resistencia<br>y control</h2>
       <ul class="s3-specs">
-        <li class="reveal d3">Grabado por zonas — responde a movimientos específicos del juego</li>
-        <li class="reveal d4">Patrón espiga — tracción lateral y control en desplazamientos</li>
-        <li class="reveal d5">Canales profundos — agarre en frenadas y cambios de dirección</li>
-        <li class="reveal d6">Zona de pivote — giros controlados sin comprometer tracción</li>
+        <li class="bullet-in d3">Grabado por zonas — responde a movimientos específicos del juego</li>
+        <li class="bullet-in d4">Patrón espiga — tracción lateral y control en desplazamientos</li>
+        <li class="bullet-in d5">Canales profundos — agarre en frenadas y cambios de dirección</li>
+        <li class="bullet-in d6">Zona de pivote — giros controlados sin comprometer tracción</li>
       </ul>
       <p class="s3-note reveal d7">*Abrasión mide la pérdida de volumen ante fricción. Menor pérdida = mayor resistencia al desgaste.</p>
     </div>
@@ -809,9 +839,7 @@
      SLIDE 5 — ALCANCE DE LA COLABORACIÓN
      ════════════════════════════════════════════════════════ -->
 <section class="slide s5" id="slide-5">
-  <video class="vid-bg" autoplay muted loop playsinline>
-    <source src="Detalle_Smash_rosa.mp4" type="video/mp4">
-  </video>
+  <img class="img-bg" src="SmashPro_1.JPEG" alt="" />
   <div class="s5-layout">
 
     <div class="s5-head">
@@ -868,7 +896,6 @@
       SMASH PRO no compite solo por diseño: compite por resistencia medible, tracción funcional y desempeño real en cancha.
     </div>
     <p class="s6-tagline reveal d5">Una suela diseñada para resistir, controlar y responder.</p>
-    <p class="s6-logo reveal d6">COURT<em>.</em></p>
   </div>
 </section>
 
