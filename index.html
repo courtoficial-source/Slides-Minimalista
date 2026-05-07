@@ -5,9 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>COURT × SMASH PRO — Propuesta de Colaboración Técnica</title>
 
-  <!-- Ethnocentric: logo COURT — futuristic, angular, brand identity -->
-  <!-- Exo 2: display + body — technological, elegant, pro -->
-  <!-- Orbitron: fallback for Ethnocentric -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.cdnfonts.com/css/ethnocentric" rel="stylesheet" />
@@ -15,41 +12,39 @@
 
   <style>
     /* ============================================================
-       CSS CUSTOM PROPERTIES — edit these to retheme everything
+       CSS CUSTOM PROPERTIES
        ============================================================ */
     :root {
       --bg-primary:    #080808;
       --bg-secondary:  #0d0d0d;
       --bg-card:       #111111;
-
       --text-primary:  #F0F0F0;
       --text-secondary:#787878;
       --text-dim:      #3C3C3C;
-
       --accent:        #d8d8d8;
       --accent-dim:    rgba(216,216,216,0.07);
       --accent-glow:   rgba(216,216,216,0.18);
-
       --border:        rgba(255,255,255,0.06);
       --border-accent: rgba(216,216,216,0.22);
 
-      /* Brand font: Ethnocentric for COURT logo marks */
       --font-brand:   'Ethnocentric Rg', 'Orbitron', sans-serif;
-      /* Display/body: Exo 2 — technological, elegant, pro */
       --font-display: 'Exo 2', sans-serif;
       --font-body:    'Exo 2', sans-serif;
 
-      /* All sizes via clamp — never fixed px outside clamp() */
-      --title-size:  clamp(1.9rem, 5.2vw, 4.8rem);
-      --h2-size:     clamp(1.2rem, 2.8vw, 2.2rem);
-      --h3-size:     clamp(0.9rem, 1.8vw, 1.35rem);
-      --body-size:   clamp(0.7rem, 1.25vw, 0.95rem);
-      --small-size:  clamp(0.6rem, 1vw,   0.8rem);
-      --label-size:  clamp(0.52rem,0.85vw, 0.68rem);
+      /* Large, impactful typography — 150pt subtitles, 70pt body */
+      --title-size:  clamp(3rem, 20vw, 26rem);
+      --h2-size:     clamp(1.8rem, 10.5vw, 200px);
+      --h3-size:     clamp(1.1rem, 5.5vw, 105px);
+      --body-size:   clamp(1rem, 4.9vw, 93px);
+      --small-size:  clamp(0.75rem, 2.5vw, 48px);
+      --label-size:  clamp(0.55rem, 1.4vw, 27px);
+
+      /* Chrome UI stays small regardless of body size */
+      --chrome-size: clamp(0.6rem, 0.8vw, 0.85rem);
 
       --slide-padding: clamp(1.5rem, 4vw, 4rem);
       --content-gap:   clamp(0.7rem, 1.8vw, 2rem);
-      --el-gap:        clamp(0.35rem,0.75vw,0.7rem);
+      --el-gap:        clamp(0.35rem, 0.75vw, 0.7rem);
 
       --ease-expo: cubic-bezier(0.16,1,0.3,1);
       --dur:       0.65s;
@@ -61,14 +56,10 @@
     *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 
     /* ============================================================
-       VIEWPORT BASE (mandatory — included verbatim)
+       VIEWPORT BASE
        ============================================================ */
     html, body { height:100%; overflow-x:hidden; }
-
-    html {
-      scroll-snap-type: y mandatory;
-      scroll-behavior: smooth;
-    }
+    html { scroll-snap-type: y mandatory; scroll-behavior: smooth; }
 
     .slide {
       width: 100vw;
@@ -82,54 +73,28 @@
     }
 
     .slide-content {
-      flex:1;
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-      max-height:100%;
-      overflow:hidden;
-      padding: var(--slide-padding);
+      flex:1; display:flex; flex-direction:column;
+      justify-content:center; max-height:100%;
+      overflow:hidden; padding: var(--slide-padding);
     }
 
     img, .image-container {
-      max-width:100%;
-      max-height: min(50vh, 400px);
-      object-fit:contain;
+      max-width:100%; max-height: min(50vh, 400px); object-fit:contain;
     }
 
     @media (max-height:700px) {
       :root {
         --slide-padding: clamp(0.75rem,3vw,2rem);
         --content-gap:   clamp(0.4rem,1.5vw,1rem);
-        --title-size:    clamp(1.25rem,4.5vw,2.5rem);
-        --h2-size:       clamp(1rem,3vw,1.75rem);
+        --h2-size:       clamp(1.2rem,6vw,80px);
+        --body-size:     clamp(0.75rem,3vw,48px);
       }
-    }
-    @media (max-height:600px) {
-      :root {
-        --slide-padding: clamp(0.5rem,2.5vw,1.5rem);
-        --content-gap:   clamp(0.3rem,1vw,0.75rem);
-        --title-size:    clamp(1.1rem,4vw,2rem);
-        --body-size:     clamp(0.7rem,1.2vw,0.95rem);
-      }
-      .nav-dots, .keyboard-hint { display:none; }
     }
     @media (max-height:500px) {
-      :root {
-        --slide-padding: clamp(0.4rem,2vw,1rem);
-        --title-size:    clamp(1rem,3.5vw,1.5rem);
-        --h2-size:       clamp(0.9rem,2.5vw,1.25rem);
-        --body-size:     clamp(0.65rem,1vw,0.85rem);
-      }
-    }
-    @media (max-width:600px) {
-      :root { --title-size: clamp(1.25rem,7vw,2.5rem); }
+      :root { --h2-size:clamp(1rem,4vw,48px); --body-size:clamp(0.65rem,2vw,28px); }
     }
     @media (prefers-reduced-motion:reduce) {
-      *, *::before, *::after {
-        animation-duration:0.01ms !important;
-        transition-duration:0.2s !important;
-      }
+      *, *::before, *::after { animation-duration:0.01ms !important; transition-duration:0.2s !important; }
       html { scroll-behavior:auto; }
     }
 
@@ -138,39 +103,31 @@
        ============================================================ */
     body {
       font-family: var(--font-body);
+      font-weight: 500;
       background: var(--bg-primary);
       color: var(--text-primary);
       overflow: hidden;
     }
 
-    /* Subtle grid texture — technical feel */
+    /* Subtle grid texture */
     .slide::before {
-      content:'';
-      position:absolute;
-      inset:0;
+      content:''; position:absolute; inset:0;
       background-image:
         linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
         linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
       background-size: 56px 56px;
-      pointer-events:none;
-      z-index:0;
+      pointer-events:none; z-index:0;
     }
     .slide > *:not(.vid-bg) { position:relative; z-index:1; }
 
     /* ============================================================
-       VIDEO BACKGROUND — loop behind slide content
-       Para agregar un video: coloca el archivo .mp4 en la misma
-       carpeta y actualiza el src del elemento <video> en cada slide.
-       Ajusta opacity para más o menos presencia visual (0.10–0.30).
+       VIDEO BACKGROUND
        ============================================================ */
     .vid-bg {
-      position:absolute;
-      inset:0;
+      position:absolute; inset:0;
       width:100%; height:100%;
-      object-fit:cover;
-      opacity:0.18;
-      z-index:0;
-      pointer-events:none;
+      object-fit:cover; opacity:0.18;
+      z-index:0; pointer-events:none;
     }
 
     /* ============================================================
@@ -178,699 +135,461 @@
        ============================================================ */
     .progress-bar {
       position:fixed; top:0; left:0; height:2px;
-      background:var(--accent);
-      width:0%;
+      background:var(--accent); width:0%;
       transition: width 0.4s var(--ease-expo);
-      z-index:1000;
-      box-shadow: 0 0 10px var(--accent-glow);
+      z-index:1000; box-shadow: 0 0 10px var(--accent-glow);
     }
 
     .slide-counter {
-      position:fixed;
-      top: clamp(0.8rem,2vh,1.5rem);
-      right: clamp(1rem,3vw,2.5rem);
-      font-family:var(--font-display);
-      font-size:var(--small-size);
-      color:var(--text-dim);
-      letter-spacing:0.1em;
-      z-index:100;
+      position:fixed; top:clamp(0.8rem,2vh,1.5rem); right:clamp(1rem,3vw,2.5rem);
+      font-family:var(--font-display); font-size:var(--chrome-size);
+      color:var(--text-dim); letter-spacing:0.1em; z-index:100;
     }
     .slide-counter span { color:var(--text-secondary); }
 
     .brand-mark {
-      position:fixed;
-      top: clamp(0.8rem,2vh,1.5rem);
-      left: clamp(1rem,3vw,2.5rem);
-      font-family:var(--font-brand);
-      font-size:var(--small-size);
-      font-weight:700;
-      letter-spacing:0.18em;
-      color:var(--text-dim);
-      z-index:100;
+      position:fixed; top:clamp(0.8rem,2vh,1.5rem); left:clamp(1rem,3vw,2.5rem);
+      font-family:var(--font-brand); font-size:var(--chrome-size);
+      font-weight:700; letter-spacing:0.18em; color:var(--text-dim); z-index:100;
     }
     .brand-mark em { color:var(--accent); font-style:normal; }
 
-    /* Navigation arrows */
     .nav-arrows {
-      position:fixed;
-      bottom: clamp(1rem,3vh,2rem);
-      right: clamp(1rem,3vw,2.5rem);
-      display:flex; gap:6px;
-      z-index:100;
+      position:fixed; bottom:clamp(1rem,3vh,2rem); right:clamp(1rem,3vw,2.5rem);
+      display:flex; gap:6px; z-index:100;
     }
     .nav-btn {
-      width: clamp(32px,3.5vw,44px);
-      height: clamp(32px,3.5vw,44px);
-      background: rgba(255,255,255,0.04);
-      border: 1px solid var(--border);
-      color:var(--text-secondary);
-      cursor:pointer;
+      width:38px; height:38px;
+      background:rgba(255,255,255,0.04); border:1px solid var(--border);
+      color:var(--text-secondary); cursor:pointer;
       display:flex; align-items:center; justify-content:center;
       transition: background 0.2s, border-color 0.2s, color 0.2s;
-      clip-path: polygon(7px 0,100% 0,100% calc(100% - 7px),calc(100% - 7px) 100%,0 100%,0 7px);
+      clip-path:polygon(7px 0,100% 0,100% calc(100% - 7px),calc(100% - 7px) 100%,0 100%,0 7px);
     }
-    .nav-btn:hover {
-      background:var(--accent-dim);
-      border-color:var(--accent);
-      color:var(--accent);
-    }
+    .nav-btn:hover { background:var(--accent-dim); border-color:var(--accent); color:var(--accent); }
     .nav-btn svg { width:13px; height:13px; }
 
-    /* Nav dots */
     .nav-dots {
-      position:fixed;
-      bottom: clamp(1rem,3vh,2rem);
-      left:50%; transform:translateX(-50%);
-      display:flex; gap:7px;
-      z-index:100;
+      position:fixed; bottom:clamp(1rem,3vh,2rem); left:50%;
+      transform:translateX(-50%); display:flex; gap:7px; z-index:100;
     }
     .dot {
-      width:5px; height:5px;
-      background:var(--text-dim);
-      border:1px solid rgba(255,255,255,0.15);
-      cursor:pointer;
-      transition: all 0.3s ease;
+      width:5px; height:5px; background:var(--text-dim);
+      border:1px solid rgba(255,255,255,0.15); cursor:pointer; transition:all 0.3s ease;
     }
-    .dot.active {
-      background:var(--accent);
-      width:18px;
-      border-color:var(--accent);
-    }
+    .dot.active { background:var(--accent); width:18px; border-color:var(--accent); }
 
     /* ============================================================
        ANIMATION CLASSES
        ============================================================ */
+    /* Standard: fade + slide up */
     .reveal {
-      opacity:0;
-      transform:translateY(22px);
-      transition: opacity var(--dur) var(--ease-expo),
-                  transform var(--dur) var(--ease-expo);
+      opacity:0; transform:translateY(22px);
+      transition: opacity var(--dur) var(--ease-expo), transform var(--dur) var(--ease-expo);
     }
     .slide.visible .reveal { opacity:1; transform:translateY(0); }
 
-    .reveal-left {
-      opacity:0;
-      transform:translateX(calc(-1 * clamp(20px,3vw,48px)));
-      transition: opacity var(--dur) var(--ease-expo),
-                  transform var(--dur) var(--ease-expo);
+    /* Photo reveal: scale + brightness — slide 3 */
+    .reveal-photo {
+      opacity:0; transform:scale(1.05);
+      filter:brightness(0.5) saturate(0.8);
+      transition: opacity 1.1s var(--ease-expo),
+                  transform 1.3s var(--ease-expo),
+                  filter 1.1s ease;
     }
-    .slide.visible .reveal-left { opacity:1; transform:translateX(0); }
+    .slide.visible .reveal-photo { opacity:1; transform:scale(1); filter:brightness(1) saturate(1); }
 
-    .reveal-right {
-      opacity:0;
-      transform:translateX(clamp(20px,3vw,48px));
-      transition: opacity var(--dur) var(--ease-expo),
-                  transform var(--dur) var(--ease-expo);
+    /* Bullet slide-in from left — slides 2, 5 */
+    .bullet-in {
+      opacity:0; transform:translateX(-50px);
+      transition: opacity 0.55s var(--ease-expo), transform 0.55s var(--ease-expo);
     }
-    .slide.visible .reveal-right { opacity:1; transform:translateX(0); }
+    .slide.visible .bullet-in { opacity:1; transform:translateX(0); }
 
-    .reveal-scale {
-      opacity:0;
-      transform:scale(0.96);
-      transition: opacity 0.9s var(--ease-expo),
-                  transform 0.9s var(--ease-expo);
+    /* Row slide-in from right — slide 4 */
+    .row-in {
+      opacity:0; transform:translateX(32px);
+      transition: opacity 0.5s var(--ease-expo), transform 0.5s var(--ease-expo);
     }
-    .slide.visible .reveal-scale { opacity:1; transform:scale(1); }
+    .slide.visible .row-in { opacity:1; transform:translateX(0); }
 
     /* Stagger delays */
-    .d1{transition-delay:0.08s} .d2{transition-delay:0.17s}
-    .d3{transition-delay:0.26s} .d4{transition-delay:0.35s}
-    .d5{transition-delay:0.44s} .d6{transition-delay:0.53s}
-    .d7{transition-delay:0.62s} .d8{transition-delay:0.71s}
+    .d1{transition-delay:0.08s}  .d2{transition-delay:0.17s}
+    .d3{transition-delay:0.26s}  .d4{transition-delay:0.35s}
+    .d5{transition-delay:0.44s}  .d6{transition-delay:0.53s}
+    .d7{transition-delay:0.62s}  .d8{transition-delay:0.71s}
+    .d9{transition-delay:0.80s}  .d10{transition-delay:0.89s}
+    .d11{transition-delay:0.98s} .d12{transition-delay:1.07s}
 
     /* ============================================================
        SHARED COMPONENTS
        ============================================================ */
     .accent-line {
-      width: clamp(22px,3.5vw,44px);
-      height:2px;
-      background:var(--accent);
-      margin-bottom:var(--el-gap);
+      width:clamp(22px,3.5vw,44px); height:2px;
+      background:var(--accent); margin-bottom:var(--el-gap);
     }
 
-    /* Chip label */
     .chip {
       display:inline-flex; align-items:center; gap:6px;
-      font-family:var(--font-display);
-      font-size:var(--label-size);
-      font-weight:600;
-      letter-spacing:0.16em;
-      text-transform:uppercase;
-      color:var(--accent);
-      padding:3px 10px;
-      border:1px solid var(--border-accent);
-      background:var(--accent-dim);
+      font-family:var(--font-display); font-size:var(--label-size);
+      font-weight:600; letter-spacing:0.16em; text-transform:uppercase;
+      color:var(--accent); padding:3px 10px;
+      border:1px solid var(--border-accent); background:var(--accent-dim);
       clip-path:polygon(6px 0,100% 0,100% calc(100% - 6px),calc(100% - 6px) 100%,0 100%,0 6px);
     }
-    .chip::before {
-      content:'';
-      width:4px; height:4px;
-      background:var(--accent);
-      border-radius:50%;
-    }
+    .chip::before { content:''; width:4px; height:4px; background:var(--accent); border-radius:50%; }
 
-    /* Key message bar */
     .key-msg {
       display:flex; align-items:center; gap:10px;
-      font-family:var(--font-display);
-      font-size:var(--small-size);
-      color:var(--text-secondary);
-      border-left:2px solid var(--accent);
-      padding-left:12px;
-      font-style:italic;
-      letter-spacing:0.02em;
-      line-height:1.4;
+      font-family:var(--font-display); font-size:var(--label-size);
+      color:var(--text-secondary); border-left:2px solid var(--accent);
+      padding-left:12px; font-style:italic; letter-spacing:0.02em; line-height:1.4;
     }
 
-    /* Image placeholder */
-    .placeholder {
-      width:100%; height:100%;
-      background:linear-gradient(135deg,#0e0e0e 0%,#161616 100%);
-      border:1px solid var(--border);
-      display:flex; flex-direction:column;
-      align-items:center; justify-content:center;
-      gap:10px;
-    }
-    .placeholder::before {
-      content:'';
-      width: clamp(24px,3.5vw,40px);
-      height: clamp(24px,3.5vw,40px);
-      border:1px solid var(--text-dim);
-      border-radius:50%;
-    }
-    .placeholder span {
-      font-family:var(--font-display);
-      font-size:var(--label-size);
-      color:var(--text-dim);
-      letter-spacing:0.14em;
-      text-transform:uppercase;
-    }
-
-    /* Slide heading shared */
     .slide-h {
-      font-family:var(--font-display);
-      font-size:var(--h2-size);
-      font-weight:700;
-      color:var(--text-primary);
-      letter-spacing:-0.01em;
-      line-height:1.1;
+      font-family:var(--font-display); font-size:var(--h2-size);
+      font-weight:700; color:var(--text-primary);
+      letter-spacing:-0.01em; line-height:1.05;
     }
 
     /* ============================================================
-       SLIDE 1 — HERO
+       SLIDE 1 — COURT ONLY
        ============================================================ */
     .s1 { background:var(--bg-primary); }
-    .s1::after {
-      content:'';
-      position:absolute; inset:0;
-      background: radial-gradient(ellipse at 80% 50%, rgba(216,216,216,0.04) 0%, transparent 55%);
-      pointer-events:none; z-index:0;
+    .s1::before { display:none; }
+
+    .s1-center {
+      position:relative; z-index:1;
+      display:flex; flex-direction:column;
+      align-items:center; justify-content:center;
+      height:100%; gap:clamp(0.5rem,1.5vh,2rem);
     }
 
-    .s1-layout {
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      height:100%;
-      padding:var(--slide-padding);
-      gap:var(--content-gap);
-      align-items:center;
-    }
-
-    .s1-left { display:flex; flex-direction:column; gap:var(--el-gap); }
-
-    .hero-title {
+    .s1-court {
       font-family:var(--font-brand);
       font-size:var(--title-size);
-      font-weight:700;
-      letter-spacing:-0.015em;
-      line-height:1.0;
-      color:var(--text-primary);
-    }
-    .hero-title .x { color:var(--accent); }
-
-    .hero-sub {
-      font-family:var(--font-display);
-      font-size:var(--h3-size);
-      font-weight:400;
-      color:var(--text-secondary);
-      letter-spacing:0.07em;
+      font-weight:700; letter-spacing:0.15em;
+      color:var(--text-primary); line-height:1; text-align:center;
     }
 
-    .hero-body {
-      font-size:var(--body-size);
-      color:var(--text-secondary);
-      line-height:1.65;
-      max-width:42ch;
-    }
-
-    .validate-list {
-      list-style:none;
-      display:flex; flex-direction:column;
-      gap: clamp(0.18rem,0.45vh,0.45rem);
-    }
-    .validate-list li {
-      font-size:var(--body-size);
-      color:var(--text-secondary);
-      display:flex; align-items:center; gap:8px;
-    }
-    .validate-list li::before {
-      content:'';
-      width:3px; height:3px;
+    .s1-line {
+      width:clamp(40px,10vw,180px); height:2px;
       background:var(--accent);
-      border-radius:50%;
-      flex-shrink:0;
     }
-
-    .s1-right {
-      display:flex; align-items:center; justify-content:center;
-      height: min(70vh,520px);
-    }
-    .s1-img { width:100%; height:100%; }
-    .s1-img img { width:100%; height:100%; max-height:none; object-fit:cover; }
 
     /* ============================================================
-       SLIDE 2 — PRODUCT FEATURES
+       SLIDE 2 — SMASH PRO: full width, no image, animated bullets
        ============================================================ */
     .s2 { background:var(--bg-primary); }
 
-    .s2-layout {
-      display:grid;
-      grid-template-columns:1.15fr 0.85fr;
-      height:100%;
-      padding:var(--slide-padding);
-      gap:var(--content-gap);
-      align-items:center;
+    .s2-full {
+      position:relative; z-index:1;
+      height:100%; display:flex; flex-direction:column;
+      justify-content:center; padding:var(--slide-padding);
+      gap:clamp(0.6rem,1.5vh,1.5rem); max-width:80%;
     }
 
-    .s2-left { display:flex; flex-direction:column; gap:var(--el-gap); }
-
-    .prod-desc {
-      font-size:var(--body-size);
+    .bullet-list {
+      list-style:none; display:flex; flex-direction:column;
+      gap:clamp(0.3rem,0.8vh,0.8rem);
+    }
+    .bullet-list li {
+      font-family:var(--font-display); font-size:var(--body-size);
       color:var(--text-secondary);
-      line-height:1.65;
-      max-width:48ch;
+      display:flex; align-items:center; gap:clamp(10px,1.5vw,20px);
+      line-height:1.2;
     }
-
-    .tech-grid {
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap: clamp(0.28rem,0.55vw,0.55rem);
-      margin-top: clamp(0.2rem,0.4vh,0.4rem);
+    .bullet-list li::before {
+      content:''; width:clamp(6px,0.6vw,10px); height:clamp(6px,0.6vw,10px);
+      background:var(--accent); border-radius:50%; flex-shrink:0;
     }
-
-    .tech-card {
-      background:var(--bg-card);
-      border:1px solid var(--border);
-      padding: clamp(0.45rem,0.9vw,0.85rem) clamp(0.55rem,1.1vw,1rem);
-      display:flex; align-items:flex-start; gap:8px;
-      transition:border-color 0.2s;
-    }
-    .tech-card:hover { border-color:var(--border-accent); }
-    .tc-dot {
-      width:4px; height:4px;
-      background:var(--accent);
-      border-radius:50%;
-      flex-shrink:0; margin-top:5px;
-    }
-    .tc-text {
-      font-size:var(--small-size);
-      color:var(--text-secondary);
-      line-height:1.45;
-    }
-
-    .s2-right {
-      display:flex; align-items:center; justify-content:center;
-      height: min(62vh,440px);
-    }
-    .s2-img { width:100%; height:100%; }
-    .s2-img img { width:100%; height:100%; max-height:none; object-fit:cover; }
 
     /* ============================================================
-       SLIDE 3 — SUELA TÉCNICA
-       NOTE: Suela_1.1.PNG and Suela_2.1.PNG must be in the
-       same folder as this HTML file.
+       SLIDE 3 — SUELA TÉCNICA: reveal-photo on images
        ============================================================ */
     .s3 { background:#000; }
-    .s3::before { display:none; } /* no grid on this slide — images are dominant */
+    .s3::before { display:none; }
 
     .s3-layout {
-      display:grid;
-      grid-template-columns:55% 45%;
-      height:100%;
-      gap:0;
+      display:grid; grid-template-columns:55% 45%;
+      height:100%; gap:0;
     }
 
-    /* Left: stacked suela images */
     .s3-images {
-      display:grid;
-      grid-template-rows:1fr 1fr;
-      height:100%;
-      gap:1px;
-      background:#000;
-      overflow:hidden;
+      display:grid; grid-template-rows:1fr 1fr;
+      height:100%; gap:1px; background:#000; overflow:hidden;
     }
 
-    .suela-wrap {
-      position:relative;
-      overflow:hidden;
-    }
-    /* Full-bleed: override viewport-base max-height for these specific images */
+    .suela-wrap { position:relative; overflow:hidden; }
     .suela-wrap img {
-      width:100%; height:100%;
-      max-height:none !important;
-      object-fit:cover;
-      object-position:center;
-      display:block;
+      width:100%; height:100%; max-height:none !important;
+      object-fit:cover; object-position:center; display:block;
     }
 
-    /* Callout component (overlay on image) */
-    .co {
-      position:absolute;
-      display:flex; align-items:center;
-      pointer-events:none;
-      z-index:10;
-    }
-    /* Callout pointing right (label to the right of the anchor dot) */
+    .co { position:absolute; display:flex; align-items:center; pointer-events:none; z-index:10; }
     .co-r { flex-direction:row; }
-    /* Callout pointing left (label to the left of the anchor dot) */
     .co-l { flex-direction:row-reverse; }
-
     .co-dot {
-      width:7px; height:7px;
-      border-radius:50%;
-      border:1.5px solid var(--accent);
-      background:rgba(216,216,216,0.2);
-      flex-shrink:0;
+      width:7px; height:7px; border-radius:50%;
+      border:1.5px solid var(--accent); background:rgba(216,216,216,0.2); flex-shrink:0;
     }
-    .co-line {
-      width:22px; height:1px;
-      background:rgba(255,255,255,0.35);
-      flex-shrink:0;
-    }
+    .co-line { width:22px; height:1px; background:rgba(255,255,255,0.35); flex-shrink:0; }
     .co-tag {
-      background:rgba(6,6,6,0.88);
-      border:1px solid rgba(255,255,255,0.12);
-      padding:3px 8px;
-      backdrop-filter:blur(4px);
+      background:rgba(6,6,6,0.88); border:1px solid rgba(255,255,255,0.12);
+      padding:3px 8px; backdrop-filter:blur(4px);
     }
     .co-tag strong {
-      display:block;
-      font-family:var(--font-display);
-      font-size: clamp(0.42rem,0.68vw,0.58rem);
-      font-weight:600;
-      color:var(--text-primary);
-      letter-spacing:0.08em;
-      text-transform:uppercase;
-      white-space:nowrap;
+      display:block; font-family:var(--font-display);
+      font-size:clamp(0.42rem,0.68vw,0.58rem); font-weight:600;
+      color:var(--text-primary); letter-spacing:0.08em;
+      text-transform:uppercase; white-space:nowrap;
     }
     .co-tag span {
-      display:block;
-      font-size: clamp(0.38rem,0.6vw,0.52rem);
-      color:var(--text-secondary);
-      white-space:nowrap;
+      display:block; font-size:clamp(0.38rem,0.6vw,0.52rem);
+      color:var(--text-secondary); white-space:nowrap;
     }
 
-    /* Right panel */
     .s3-right {
-      display:flex; flex-direction:column;
-      justify-content:center;
-      gap:var(--el-gap);
-      padding:var(--slide-padding);
-      background:var(--bg-secondary);
-      border-left:1px solid var(--border);
-      overflow:hidden;
+      display:flex; flex-direction:column; justify-content:center;
+      gap:var(--el-gap); padding:var(--slide-padding);
+      background:var(--bg-secondary); border-left:1px solid var(--border); overflow:hidden;
     }
 
-    .s3-intro {
-      font-size:var(--small-size);
-      color:var(--text-secondary);
-      line-height:1.6;
-      max-width:38ch;
-    }
-
-    /* Technical table inside right panel */
-    .tech-table { width:100%; border-collapse:collapse; }
-    .tech-table th {
+    .s3-h {
       font-family:var(--font-display);
-      font-size:var(--label-size);
-      font-weight:600;
-      text-transform:uppercase;
-      letter-spacing:0.1em;
-      color:var(--text-dim);
-      text-align:left;
-      padding: clamp(3px,0.45vh,5px) 0;
-      border-bottom:1px solid var(--border);
+      font-size:clamp(1.2rem,4vw,80px);
+      font-weight:700; color:var(--text-primary); line-height:1.1;
     }
-    .tech-table td {
-      font-size:var(--label-size);
-      padding: clamp(2px,0.4vh,4px) 0;
-      vertical-align:top;
-      border-bottom:1px solid rgba(255,255,255,0.03);
-      line-height:1.4;
-      color:var(--text-secondary);
+
+    .s3-specs {
+      list-style:none; display:flex; flex-direction:column;
+      gap:clamp(0.3rem,0.7vh,0.7rem); margin-top:clamp(0.3rem,0.7vh,0.7rem);
     }
-    .tech-table td:first-child {
-      color:var(--text-primary);
-      font-weight:500;
-      padding-right:10px;
-      white-space:nowrap;
-      min-width:max-content;
+    .s3-specs li {
+      font-size:clamp(0.7rem,1.5vw,24px); color:var(--text-secondary);
+      display:flex; align-items:flex-start; gap:8px; line-height:1.35;
     }
-    .tech-table tr:last-child td { border-bottom:none; }
+    .s3-specs li::before {
+      content:''; width:3px; height:3px; background:var(--accent);
+      border-radius:50%; flex-shrink:0; margin-top:7px;
+    }
 
     .s3-note {
-      font-size:var(--label-size);
-      color:var(--text-dim);
-      font-style:italic;
-      line-height:1.45;
-      padding-top: clamp(2px,0.3vh,4px);
-      border-top:1px solid var(--border);
+      font-size:clamp(0.5rem,0.9vw,14px); color:var(--text-dim);
+      font-style:italic; line-height:1.45;
+      padding-top:clamp(2px,0.3vh,4px); border-top:1px solid var(--border);
     }
 
     /* ============================================================
-       SLIDE 4 — TECHNOLOGY TABLE
+       SLIDE 4 — COMPARISON TABLE: full width, row-in animations
        ============================================================ */
     .s4 { background:var(--bg-primary); }
 
-    .s4-layout {
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      height:100%;
-      padding:var(--slide-padding);
-      gap:var(--content-gap);
-      align-items:center;
+    .s4-full {
+      position:relative; z-index:1;
+      height:100%; display:flex; flex-direction:column;
+      justify-content:center; padding:var(--slide-padding);
+      gap:clamp(0.6rem,1.5vh,1.5rem);
     }
 
-    .s4-left { display:flex; flex-direction:column; gap:var(--el-gap); }
+    .comp-wrap {
+      display:flex; flex-direction:column; gap:0;
+      border:1px solid var(--border-accent);
+      margin-top:clamp(0.5rem,1vh,1.2rem); overflow:hidden;
+    }
 
-    .comp-table { width:100%; border-collapse:collapse; margin-top:clamp(0.3rem,0.7vh,0.7rem); }
-    .comp-table thead tr { border-bottom:1px solid var(--border-accent); }
-    .comp-table th {
-      font-family:var(--font-display);
-      font-size:var(--label-size);
-      font-weight:600;
-      text-transform:uppercase;
-      letter-spacing:0.12em;
-      padding: clamp(5px,0.8vh,8px) clamp(8px,1.2vw,14px);
-      text-align:left;
-      color:var(--text-dim);
+    .comp-head {
+      display:grid; grid-template-columns:1fr 1fr;
+      background:rgba(216,216,216,0.05);
+      border-bottom:1px solid var(--border-accent);
     }
-    .comp-table th:last-child { color:var(--accent); }
-    .comp-table tbody tr { border-bottom:1px solid rgba(255,255,255,0.04); }
-    .comp-table tbody tr:hover { background:rgba(255,255,255,0.018); }
-    .comp-table td {
-      font-size:var(--body-size);
-      padding: clamp(6px,1vh,10px) clamp(8px,1.2vw,14px);
-      color:var(--text-secondary);
-      line-height:1.3;
+    .comp-head-cell {
+      font-family:var(--font-display); font-size:var(--label-size);
+      font-weight:700; text-transform:uppercase; letter-spacing:0.15em;
+      padding:clamp(6px,1vh,12px) clamp(10px,2vw,24px); color:var(--text-dim);
     }
-    .comp-table td:first-child { color:var(--text-primary); font-weight:500; }
-    .comp-table td:last-child { color:var(--text-primary); }
-    .comp-table td:last-child strong { color:var(--accent); }
+    .comp-head-cell:last-child { color:var(--accent); border-left:1px solid var(--border-accent); }
 
-    .s4-right {
-      display:flex; align-items:center; justify-content:center;
-      height:min(62vh,440px);
+    .comp-row {
+      display:grid; grid-template-columns:1fr 1fr;
+      border-bottom:1px solid rgba(255,255,255,0.04);
+      transition:background 0.2s;
     }
-    .s4-img { width:100%; height:100%; }
-    .s4-img img { width:100%; height:100%; max-height:none; object-fit:cover; }
+    .comp-row:last-child { border-bottom:none; }
+    .comp-row:hover { background:rgba(255,255,255,0.02); }
+
+    .comp-cell {
+      font-family:var(--font-display); font-size:var(--body-size);
+      padding:clamp(8px,1.2vh,16px) clamp(10px,2vw,24px);
+      color:var(--text-secondary); line-height:1.2;
+      display:flex; align-items:center;
+    }
+    .comp-cell:first-child { color:var(--text-primary); }
+    .comp-cell:last-child { border-left:1px solid rgba(255,255,255,0.04); }
+    .comp-cell strong { color:var(--accent); }
 
     /* ============================================================
-       SLIDE 5 — COLLABORATION SCOPE
+       SLIDE 5 — COLLABORATION SCOPE: bullet-in per item
        ============================================================ */
     .s5 { background:var(--bg-primary); }
 
     .s5-layout {
-      height:100%;
-      padding:var(--slide-padding);
-      padding-top: clamp(2.2rem,5.5vh,4.5rem);
-      display:flex;
-      flex-direction:column;
-      gap:var(--el-gap);
-      overflow:hidden;
+      position:relative; z-index:1;
+      height:100%; padding:var(--slide-padding);
+      padding-top:clamp(2rem,5vh,4rem);
+      display:flex; flex-direction:column;
+      gap:clamp(0.5rem,1vh,1.2rem); overflow:hidden;
     }
 
     .s5-head { display:flex; flex-direction:column; gap:var(--el-gap); }
-    .s5-desc { font-size:var(--body-size); color:var(--text-secondary); max-width:58ch; }
 
     .s5-cols {
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:var(--content-gap);
-      flex:1;
-      min-height:0;
+      display:grid; grid-template-columns:1fr 1fr;
+      gap:var(--content-gap); flex:1; min-height:0;
     }
 
-    .s5-col { display:flex; flex-direction:column; gap:var(--el-gap); min-height:0; }
+    .s5-col { display:flex; flex-direction:column; gap:clamp(0.3rem,0.7vh,0.8rem); min-height:0; }
 
     .col-title {
-      font-family:var(--font-display);
-      font-size:var(--label-size);
-      font-weight:600;
-      letter-spacing:0.1em;
-      text-transform:uppercase;
-      color:var(--text-dim);
-      padding-bottom: clamp(3px,0.4vh,5px);
+      font-family:var(--font-display); font-size:var(--label-size);
+      font-weight:600; letter-spacing:0.1em; text-transform:uppercase;
+      color:var(--text-dim); padding-bottom:clamp(3px,0.4vh,5px);
       border-bottom:1px solid var(--border);
     }
 
     .checklist {
-      list-style:none;
-      display:flex; flex-direction:column;
-      gap: clamp(0.18rem,0.38vh,0.42rem);
+      list-style:none; display:flex; flex-direction:column;
+      gap:clamp(0.3rem,0.7vh,0.8rem);
     }
     .checklist li {
-      font-size:var(--body-size);
-      color:var(--text-secondary);
-      display:flex; align-items:flex-start; gap:7px;
-      line-height:1.4;
+      font-size:var(--body-size); color:var(--text-secondary);
+      display:flex; align-items:flex-start; gap:clamp(8px,1vw,14px); line-height:1.2;
     }
     .chk {
-      width:13px; height:13px;
-      border:1px solid var(--border-accent);
-      background:var(--accent-dim);
-      flex-shrink:0; margin-top:2px;
+      width:clamp(12px,1.2vw,18px); height:clamp(12px,1.2vw,18px);
+      border:1px solid var(--border-accent); background:var(--accent-dim);
+      flex-shrink:0; margin-top:clamp(2px,0.3vh,4px);
       display:flex; align-items:center; justify-content:center;
     }
     .chk::after {
-      content:'';
-      width:4px; height:4px;
-      background:var(--accent);
-      border-radius:50%;
+      content:''; width:clamp(4px,0.4vw,6px); height:clamp(4px,0.4vw,6px);
+      background:var(--accent); border-radius:50%;
     }
 
     /* ============================================================
-       SLIDE 6 — CLOSING
+       SLIDE 6 — CLOSING: dynamic visual effects
        ============================================================ */
-    .s6 {
-      background:#000;
-      overflow:hidden;
-    }
+    .s6 { background:#000; overflow:hidden; }
     .s6::before { display:none; }
 
-    .s6-bg {
+    /* Giant faded COURT background text */
+    .s6-bg-court {
+      position:absolute; inset:0;
+      display:flex; align-items:center; justify-content:center;
+      font-family:var(--font-brand);
+      font-size:clamp(10rem,42vw,55rem);
+      color:rgba(216,216,216,0.03);
+      z-index:0; pointer-events:none; overflow:hidden;
+      white-space:nowrap; user-select:none;
+    }
+
+    /* Gradient */
+    .s6-bg-grad {
       position:absolute; inset:0;
       background:
         radial-gradient(ellipse at 35% 55%, rgba(216,216,216,0.04) 0%, transparent 50%),
         radial-gradient(ellipse at 75% 25%, rgba(255,255,255,0.025) 0%, transparent 40%);
-      z-index:0;
+      z-index:0; pointer-events:none;
     }
-    /* Thin diagonal accent line */
-    .s6-bg::after {
-      content:'';
-      position:absolute;
-      top:0; left:0; right:0; bottom:0;
-      background:
-        linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
-      background-size:56px 56px;
+
+    /* Pulsing rings — translate included in keyframes to avoid conflict */
+    @keyframes pulse-ring {
+      0%   { transform:translate(-50%,-50%) scale(0.85); opacity:0.5; }
+      50%  { transform:translate(-50%,-50%) scale(1.12); opacity:0.15; }
+      100% { transform:translate(-50%,-50%) scale(0.85); opacity:0.5; }
+    }
+    .s6-ring {
+      position:absolute; top:50%; left:50%;
+      border-radius:50%; border:1px solid rgba(216,216,216,0.1);
+      animation:pulse-ring 5s ease-in-out infinite;
+      pointer-events:none; z-index:0;
+    }
+    .s6-ring-sm {
+      width:clamp(200px,38vw,550px); height:clamp(200px,38vw,550px);
+    }
+    .s6-ring-lg {
+      width:clamp(350px,60vw,860px); height:clamp(350px,60vw,860px);
+      animation-delay:-2.5s;
+    }
+
+    /* Horizontal scan line */
+    @keyframes scan {
+      0%   { top:-2px; opacity:0.4; }
+      80%  { opacity:0.4; }
+      100% { top:100%; opacity:0; }
+    }
+    .s6-scan {
+      position:absolute; left:0; right:0; height:1px;
+      background:linear-gradient(90deg, transparent, rgba(216,216,216,0.3), transparent);
+      animation:scan 6s linear infinite;
+      z-index:0; pointer-events:none;
     }
 
     .s6-layout {
-      position:relative; z-index:1;
-      height:100%;
-      display:flex; flex-direction:column;
+      position:relative; z-index:2;
+      height:100%; display:flex; flex-direction:column;
       align-items:center; justify-content:center;
-      text-align:center;
-      padding:var(--slide-padding);
-      gap:var(--el-gap);
+      text-align:center; padding:var(--slide-padding);
+      gap:clamp(0.4rem,1vh,1.2rem);
     }
 
     .s6-eyebrow {
-      font-family:var(--font-display);
-      font-size:var(--label-size);
-      letter-spacing:0.28em;
-      text-transform:uppercase;
-      color:var(--accent);
+      font-family:var(--font-display); font-size:var(--label-size);
+      letter-spacing:0.28em; text-transform:uppercase; color:var(--accent);
     }
 
     .s6-title {
-      font-family:var(--font-display);
-      font-size: clamp(1.4rem,4.2vw,3.2rem);
-      font-weight:700;
-      color:var(--text-primary);
-      line-height:1.08;
-      max-width:18ch;
+      font-family:var(--font-display); font-size:var(--h2-size);
+      font-weight:700; color:var(--text-primary); line-height:1.05; max-width:20ch;
     }
 
     .s6-body {
-      font-size:var(--body-size);
-      color:var(--text-secondary);
-      max-width:52ch;
-      line-height:1.65;
-      margin-top:clamp(0.2rem,0.6vh,0.6rem);
+      font-size:var(--body-size); color:var(--text-secondary);
+      max-width:40ch; line-height:1.5;
     }
 
     .s6-claim {
-      font-family:var(--font-display);
-      font-size: clamp(0.7rem,1.4vw,1rem);
-      color:var(--text-primary);
-      max-width:58ch;
-      line-height:1.5;
-      padding: clamp(0.5rem,1.2vh,1rem) clamp(1rem,2.5vw,2.2rem);
-      border:1px solid var(--border);
-      background:rgba(255,255,255,0.02);
-      margin-top:clamp(0.2rem,0.6vh,0.6rem);
+      font-family:var(--font-display); font-size:var(--label-size);
+      color:var(--text-primary); max-width:58ch; line-height:1.5;
+      padding:clamp(0.5rem,1.2vh,1rem) clamp(1rem,2.5vw,2.2rem);
+      border:1px solid var(--border); background:rgba(255,255,255,0.02);
     }
 
     .s6-tagline {
-      font-family:var(--font-display);
-      font-size: clamp(0.85rem,1.9vw,1.45rem);
-      font-weight:700;
-      color:var(--accent);
-      letter-spacing:0.04em;
+      font-family:var(--font-display); font-size:var(--small-size);
+      font-weight:700; color:var(--accent); letter-spacing:0.04em;
     }
 
     .s6-logo {
-      font-family:var(--font-brand);
-      font-size: clamp(0.85rem,1.9vw,1.4rem);
-      font-weight:700;
-      letter-spacing:0.22em;
-      color:var(--text-primary);
+      font-family:var(--font-brand); font-size:var(--small-size);
+      font-weight:700; letter-spacing:0.22em; color:var(--text-primary);
       margin-top:clamp(0.3rem,0.8vh,0.8rem);
     }
     .s6-logo em { color:var(--accent); font-style:normal; }
 
     /* ============================================================
-       INLINE EDITOR — user opted in
+       INLINE EDITOR
        ============================================================ */
     .edit-hotzone {
-      position:fixed; top:0; left:0;
-      width:80px; height:80px;
+      position:fixed; top:0; left:0; width:80px; height:80px;
       z-index:10000; cursor:pointer;
     }
     .edit-toggle {
       position:fixed; top:14px; left:14px;
-      background:var(--accent); color:#fff;
-      border:none;
-      font-family:var(--font-display);
-      font-size:var(--label-size);
-      letter-spacing:0.1em;
-      padding:5px 11px;
-      cursor:pointer;
-      opacity:0; pointer-events:none;
-      transition:opacity 0.3s ease;
-      z-index:10001;
+      background:var(--accent); color:#fff; border:none;
+      font-family:var(--font-display); font-size:var(--chrome-size);
+      letter-spacing:0.1em; padding:5px 11px; cursor:pointer;
+      opacity:0; pointer-events:none; transition:opacity 0.3s ease; z-index:10001;
       clip-path:polygon(6px 0,100% 0,100% calc(100% - 6px),calc(100% - 6px) 100%,0 100%,0 6px);
     }
     .edit-toggle.show, .edit-toggle.active { opacity:1; pointer-events:auto; }
@@ -878,25 +597,20 @@
     .edit-banner {
       position:fixed; bottom:0; left:0; right:0;
       background:var(--accent); color:#fff;
-      font-family:var(--font-display);
-      font-size:var(--small-size);
-      letter-spacing:0.1em;
-      text-align:center; padding:6px;
-      z-index:10000;
-      opacity:0; pointer-events:none;
-      transition:opacity 0.3s ease;
+      font-family:var(--font-display); font-size:var(--chrome-size);
+      letter-spacing:0.1em; text-align:center; padding:6px;
+      z-index:10000; opacity:0; pointer-events:none; transition:opacity 0.3s ease;
     }
     .edit-banner.active { opacity:1; pointer-events:auto; }
 
     body.edit-active [contenteditable] {
-      outline:1px dashed rgba(216,216,216,0.4);
-      cursor:text;
+      outline:1px dashed rgba(216,216,216,0.4); cursor:text;
     }
   </style>
 </head>
 <body>
 
-<!-- ── Chrome ───────────────────────────────────────────── -->
+<!-- ── Chrome ────────────────────────────────────────────── -->
 <div class="progress-bar" id="progressBar"></div>
 <div class="slide-counter" id="slideCounter"><span>01</span> / 06</div>
 <div class="brand-mark">COURT<em>.</em></div>
@@ -912,127 +626,67 @@
 
 <nav class="nav-dots" id="navDots" aria-label="Navegación"></nav>
 
-<!-- Inline editor (hover esquina superior izquierda o presiona E) -->
 <div class="edit-hotzone" id="editHotzone"></div>
 <button class="edit-toggle" id="editToggle">✏ EDITAR</button>
 <div class="edit-banner" id="editBanner">MODO EDICIÓN — Clic en cualquier texto · Ctrl+S para guardar</div>
 
 
 <!-- ════════════════════════════════════════════════════════
-     SLIDE 1 — HERO
+     SLIDE 1 — COURT
      ════════════════════════════════════════════════════════ -->
 <section class="slide s1" id="slide-1">
-  <!-- VIDEO FONDO SLIDE 1: reemplaza src con tu archivo, ej: src="video-s1.mp4" -->
   <video class="vid-bg" autoplay muted loop playsinline>
     <source src="Detalle_Smash_rosa.mp4" type="video/mp4">
   </video>
-  <div class="s1-layout">
-
-    <div class="s1-left">
-      <div class="chip reveal d1">Propuesta Técnica</div>
-
-      <h1 class="hero-title reveal d2">COURT <span class="x">×</span><br>SMASH PRO</h1>
-      <p class="hero-sub reveal d3">Propuesta de colaboración técnica</p>
-
-      <p class="hero-body reveal d4">
-        Invitamos a una jugadora de alto nivel a probar el SMASH PRO en condiciones reales de entrenamiento y partido.
-      </p>
-
-      <ul class="validate-list reveal d5">
-        <li>Agarre en cancha</li>
-        <li>Estabilidad lateral</li>
-        <li>Respuesta en arranques y frenadas</li>
-        <li>Comodidad durante uso prolongado</li>
-        <li>Desgaste de la suela</li>
-        <li>Retroalimentación técnica para mejoras futuras</li>
-      </ul>
-
-      <p class="key-msg reveal d6">Una prueba real, con criterio profesional de cancha.</p>
-    </div>
-
-    <div class="s1-right reveal-right d2">
-      <div class="s1-img">
-        <img src="SmashPro_1.JPEG" alt="Jugador SMASH PRO" />
-      </div>
-    </div>
-
+  <div class="s1-center">
+    <h1 class="s1-court reveal d1">COURT</h1>
+    <div class="s1-line reveal d2"></div>
   </div>
 </section>
 
 
 <!-- ════════════════════════════════════════════════════════
-     SLIDE 2 — SMASH PRO: CALZADO PARA JUEGO INTENSIVO
+     SLIDE 2 — SMASH PRO
      ════════════════════════════════════════════════════════ -->
 <section class="slide s2" id="slide-2">
-  <!-- VIDEO FONDO SLIDE 2: reemplaza src con tu archivo, ej: src="video-s2.mp4" -->
   <video class="vid-bg" autoplay muted loop playsinline>
     <source src="Detalle_Smash_negro_azul.mp4" type="video/mp4">
   </video>
-  <div class="s2-layout">
-
-    <div class="s2-left">
-      <div class="accent-line reveal d1"></div>
-      <h2 class="slide-h reveal d2">SMASH PRO<br>Calzado para juego intensivo</h2>
-
-      <p class="prod-desc reveal d3">
-        Desarrollado para deportes de cancha donde el calzado está expuesto a fricción constante, cambios de dirección y movimientos explosivos.
-      </p>
-
-      <div class="tech-grid">
-        <div class="tech-card reveal d3"><div class="tc-dot"></div><p class="tc-text">Suela con alta resistencia a la abrasión</p></div>
-        <div class="tech-card reveal d4"><div class="tc-dot"></div><p class="tc-text">Tracción multidireccional</p></div>
-        <div class="tech-card reveal d4"><div class="tc-dot"></div><p class="tc-text">Grabado segmentado por zonas funcionales</p></div>
-        <div class="tech-card reveal d5"><div class="tc-dot"></div><p class="tc-text">Zona de pivote para giros controlados</p></div>
-        <div class="tech-card reveal d5"><div class="tc-dot"></div><p class="tc-text">Diseño enfocado en estabilidad lateral</p></div>
-        <div class="tech-card reveal d6"><div class="tc-dot"></div><p class="tc-text">Construcción pensada para entrenamientos y partidos</p></div>
-      </div>
-
-      <p class="key-msg reveal d7">Diseñado para responder a los movimientos reales del juego: arrancar, frenar, girar y volver a moverse.</p>
-    </div>
-
-    <div class="s2-right reveal-right d3">
-      <div class="s2-img">
-        <img src="Smash pro_1.2.PNG" alt="SMASH PRO detalle" />
-      </div>
-    </div>
-
+  <div class="s2-full">
+    <div class="accent-line reveal d1"></div>
+    <h2 class="slide-h reveal d2">SMASH PRO<br>Calzado para juego intensivo</h2>
+    <ul class="bullet-list">
+      <li class="bullet-in d3">Suela con alta resistencia a la abrasión</li>
+      <li class="bullet-in d4">Tracción multidireccional</li>
+      <li class="bullet-in d5">Grabado segmentado por zonas funcionales</li>
+      <li class="bullet-in d6">Zona de pivote para giros controlados</li>
+      <li class="bullet-in d7">Construcción para entrenamientos y partidos</li>
+    </ul>
   </div>
 </section>
 
 
 <!-- ════════════════════════════════════════════════════════
      SLIDE 3 — SUELA TÉCNICA
-     IMPORTANTE: coloca Suela_1.1.PNG y Suela_2.1.PNG
-     en la misma carpeta que este archivo HTML.
      ════════════════════════════════════════════════════════ -->
 <section class="slide s3" id="slide-3">
-  <!-- VIDEO FONDO SLIDE 3: reemplaza src con tu archivo, ej: src="video-s3.mp4" -->
   <video class="vid-bg" autoplay muted loop playsinline>
     <source src="Detalle_Smash_rosa.mp4" type="video/mp4">
   </video>
   <div class="s3-layout">
 
-    <!-- ── Izquierda: imágenes de suela con callouts ── -->
     <div class="s3-images">
-
-      <!-- Imagen superior: Suela_1.1.PNG — patrón espiga, primer plano -->
-      <div class="suela-wrap reveal-scale d1">
+      <div class="suela-wrap reveal-photo d1">
         <img src="Suela_1.1.PNG" alt="Suela SMASH PRO — patrón espiga" />
-
-        <!-- Callout 1: Patrón tipo espiga (derecha) -->
         <div class="co co-r" style="top:32%; left:52%;">
-          <div class="co-dot"></div>
-          <div class="co-line"></div>
+          <div class="co-dot"></div><div class="co-line"></div>
           <div class="co-tag">
             <strong>Patrón tipo espiga</strong>
             <span>Tracción lateral y control en desplazamientos</span>
           </div>
         </div>
-
-        <!-- Callout 2: Canales profundos (derecha) -->
         <div class="co co-r" style="top:62%; left:52%;">
-          <div class="co-dot"></div>
-          <div class="co-line"></div>
+          <div class="co-dot"></div><div class="co-line"></div>
           <div class="co-tag">
             <strong>Canales profundos</strong>
             <span>Agarre y estabilidad en frenadas</span>
@@ -1040,74 +694,42 @@
         </div>
       </div>
 
-      <!-- Imagen inferior: Suela_2.1.PNG — suela completa, zona de pivote -->
-      <div class="suela-wrap reveal-scale d2">
+      <div class="suela-wrap reveal-photo d2">
         <img src="Suela_2.1.PNG" alt="Suela SMASH PRO — vista completa" />
-
-        <!-- Callout 3: Bloques de contacto (derecha) -->
         <div class="co co-r" style="top:22%; left:52%;">
-          <div class="co-dot"></div>
-          <div class="co-line"></div>
+          <div class="co-dot"></div><div class="co-line"></div>
           <div class="co-tag">
             <strong>Bloques de contacto</strong>
             <span>Apoyo en zonas críticas de fricción</span>
           </div>
         </div>
-
-        <!-- Callout 4: Zona circular de pivote (derecha) -->
         <div class="co co-r" style="bottom:25%; left:52%;">
-          <div class="co-dot"></div>
-          <div class="co-line"></div>
+          <div class="co-dot"></div><div class="co-line"></div>
           <div class="co-tag">
             <strong>Zona circular de pivote</strong>
             <span>Giros controlados sin perder tracción</span>
           </div>
         </div>
-
-        <!-- Callout 5: Abrasión 95 (izquierda) -->
         <div class="co co-l" style="top:52%; right:52%;">
-          <div class="co-dot"></div>
-          <div class="co-line"></div>
+          <div class="co-dot"></div><div class="co-line"></div>
           <div class="co-tag">
             <strong>Abrasión: 95*</strong>
             <span>Resistencia al desgaste por pérdida de volumen</span>
           </div>
         </div>
       </div>
-
     </div>
 
-    <!-- ── Derecha: heading + tabla ── -->
     <div class="s3-right">
       <div class="accent-line reveal d1"></div>
-      <h2 class="slide-h reveal d2" style="font-size:clamp(1rem,2.3vw,1.7rem); line-height:1.2;">
-        Suela SMASH PRO<br>Tracción, resistencia<br>y control
-      </h2>
-
-      <p class="s3-intro reveal d3">
-        Desarrollada para responder a la exigencia real del juego: fricción constante, cambios de dirección, frenadas, arranques y giros.
-      </p>
-
-      <table class="tech-table reveal d4">
-        <thead>
-          <tr>
-            <th>Elemento</th>
-            <th>Función en cancha</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>Grabado por zonas</td><td>Responde a movimientos específicos del juego</td></tr>
-          <tr><td>Patrón espiga</td><td>Tracción lateral y control en desplazamientos</td></tr>
-          <tr><td>Canales profundos</td><td>Agarre en frenadas y cambios de dirección</td></tr>
-          <tr><td>Zona de pivote</td><td>Giros controlados sin comprometer tracción</td></tr>
-          <tr><td>Bloques de contacto</td><td>Apoyo en zonas críticas de fricción</td></tr>
-          <tr><td>Abrasión: 95*</td><td>Resistencia al desgaste por pérdida de volumen</td></tr>
-        </tbody>
-      </table>
-
-      <p class="s3-note reveal d5">*La abrasión mide la pérdida de volumen ante fricción. A menor pérdida de material, mayor resistencia al desgaste.</p>
-
-      <p class="key-msg reveal d6" style="margin-top:auto;">Una suela diseñada para resistir la fricción de la cancha, mantener tracción multidireccional y dar mayor control en movimientos explosivos.</p>
+      <h2 class="s3-h reveal d2">Suela SMASH PRO<br>Tracción, resistencia<br>y control</h2>
+      <ul class="s3-specs">
+        <li class="reveal d3">Grabado por zonas — responde a movimientos específicos del juego</li>
+        <li class="reveal d4">Patrón espiga — tracción lateral y control en desplazamientos</li>
+        <li class="reveal d5">Canales profundos — agarre en frenadas y cambios de dirección</li>
+        <li class="reveal d6">Zona de pivote — giros controlados sin comprometer tracción</li>
+      </ul>
+      <p class="s3-note reveal d7">*Abrasión mide la pérdida de volumen ante fricción. Menor pérdida = mayor resistencia al desgaste.</p>
     </div>
 
   </div>
@@ -1115,44 +737,40 @@
 
 
 <!-- ════════════════════════════════════════════════════════
-     SLIDE 4 — TECNOLOGÍA DE CANCHA CON ENFOQUE PREMIUM
+     SLIDE 4 — TECNOLOGÍA DE CANCHA: comparison table
      ════════════════════════════════════════════════════════ -->
 <section class="slide s4" id="slide-4">
-  <!-- VIDEO FONDO SLIDE 4: reemplaza src con tu archivo, ej: src="video-s4.mp4" -->
   <video class="vid-bg" autoplay muted loop playsinline>
     <source src="Detalle_Smash_negro_azul.mp4" type="video/mp4">
   </video>
-  <div class="s4-layout">
+  <div class="s4-full">
+    <div class="accent-line reveal d1"></div>
+    <h2 class="slide-h reveal d2">Tecnología de cancha<br>con enfoque premium</h2>
 
-    <div class="s4-left">
-      <div class="accent-line reveal d1"></div>
-      <h2 class="slide-h reveal d2">Tecnología de cancha<br>con enfoque premium</h2>
-
-      <table class="comp-table reveal d3">
-        <thead>
-          <tr>
-            <th>Lo que exige el calzado premium</th>
-            <th>SMASH PRO</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>Resistencia al desgaste</td><td><strong>Abrasión interna: 95 cm³</strong></td></tr>
-          <tr><td>Tracción multidireccional</td><td>Grabado segmentado por zonas</td></tr>
-          <tr><td>Estabilidad lateral</td><td>Zonas de contacto para apoyo y control</td></tr>
-          <tr><td>Control de giro</td><td>Zona circular de pivote</td></tr>
-          <tr><td>Uso intensivo</td><td>Diseñado para entrenamientos y partidos</td></tr>
-        </tbody>
-      </table>
-
-      <p class="key-msg reveal d5">Un tenis desarrollado con criterios técnicos de cancha, no solo con enfoque estético.</p>
-    </div>
-
-    <div class="s4-right reveal-right d3">
-      <div class="s4-img">
-        <img src="Smash pro_1.1.PNG" alt="SMASH PRO lateral completo" />
+    <div class="comp-wrap">
+      <div class="comp-head row-in d3">
+        <div class="comp-head-cell">Lo que exige el calzado premium</div>
+        <div class="comp-head-cell">SMASH PRO</div>
+      </div>
+      <div class="comp-row row-in d4">
+        <div class="comp-cell">Resistencia al desgaste</div>
+        <div class="comp-cell"><strong>Abrasión interna: 95 cm³</strong></div>
+      </div>
+      <div class="comp-row row-in d5">
+        <div class="comp-cell">Tracción multidireccional</div>
+        <div class="comp-cell">Grabado segmentado por zonas</div>
+      </div>
+      <div class="comp-row row-in d6">
+        <div class="comp-cell">Estabilidad lateral</div>
+        <div class="comp-cell">Zonas de contacto para apoyo y control</div>
+      </div>
+      <div class="comp-row row-in d7">
+        <div class="comp-cell">Control de giro</div>
+        <div class="comp-cell">Zona circular de pivote</div>
       </div>
     </div>
 
+    <p class="key-msg reveal d8">Un tenis desarrollado con criterios técnicos de cancha, no solo con enfoque estético.</p>
   </div>
 </section>
 
@@ -1161,7 +779,6 @@
      SLIDE 5 — ALCANCE DE LA COLABORACIÓN
      ════════════════════════════════════════════════════════ -->
 <section class="slide s5" id="slide-5">
-  <!-- VIDEO FONDO SLIDE 5: reemplaza src con tu archivo, ej: src="video-s5.mp4" -->
   <video class="vid-bg" autoplay muted loop playsinline>
     <source src="Detalle_Smash_rosa.mp4" type="video/mp4">
   </video>
@@ -1170,61 +787,51 @@
     <div class="s5-head">
       <div class="accent-line reveal d1"></div>
       <h2 class="slide-h reveal d2">Alcance de la colaboración</h2>
-      <p class="s5-desc reveal d3">Buscamos que el SMASH PRO sea probado y evaluado desde una perspectiva profesional.</p>
     </div>
 
     <div class="s5-cols">
-
       <div class="s5-col">
-        <p class="col-title reveal d3">Propuesta de colaboración</p>
+        <p class="col-title bullet-in d2">Propuesta de colaboración</p>
         <ul class="checklist">
-          <li class="reveal d4"><div class="chk"></div>Uso en entrenamientos y partidos</li>
-          <li class="reveal d4"><div class="chk"></div>Retroalimentación técnica después del uso</li>
-          <li class="reveal d5"><div class="chk"></div>Contenido en cancha usando el calzado</li>
-          <li class="reveal d5"><div class="chk"></div>Registro de primeras impresiones</li>
-          <li class="reveal d6"><div class="chk"></div>Evaluación del desgaste tras periodo de prueba</li>
-          <li class="reveal d6"><div class="chk"></div>Comentarios sobre ajuste, agarre y desempeño</li>
+          <li class="bullet-in d3"><div class="chk"></div>Uso en entrenamientos y partidos</li>
+          <li class="bullet-in d4"><div class="chk"></div>Retroalimentación técnica después del uso</li>
+          <li class="bullet-in d5"><div class="chk"></div>Contenido en cancha usando el calzado</li>
+          <li class="bullet-in d6"><div class="chk"></div>Evaluación del desgaste tras periodo de prueba</li>
         </ul>
       </div>
-
       <div class="s5-col">
-        <p class="col-title reveal d3">Puntos a evaluar</p>
+        <p class="col-title bullet-in d2">Puntos a evaluar</p>
         <ul class="checklist">
-          <li class="reveal d4"><div class="chk"></div>Sensación de agarre</li>
-          <li class="reveal d4"><div class="chk"></div>Seguridad en desplazamientos laterales</li>
-          <li class="reveal d5"><div class="chk"></div>Comodidad después de varias sesiones</li>
-          <li class="reveal d5"><div class="chk"></div>Respuesta en arranques y frenadas</li>
-          <li class="reveal d6"><div class="chk"></div>Estabilidad del pie</li>
-          <li class="reveal d6"><div class="chk"></div>Desgaste visible de la suela</li>
-          <li class="reveal d7"><div class="chk"></div>Percepción frente a otros tenis de cancha</li>
+          <li class="bullet-in d3"><div class="chk"></div>Sensación de agarre y estabilidad lateral</li>
+          <li class="bullet-in d4"><div class="chk"></div>Comodidad después de varias sesiones</li>
+          <li class="bullet-in d5"><div class="chk"></div>Respuesta en arranques y frenadas</li>
+          <li class="bullet-in d6"><div class="chk"></div>Percepción frente a otros tenis de cancha</li>
         </ul>
       </div>
-
     </div>
 
     <p class="key-msg reveal d8">No buscamos una opinión de catálogo. Buscamos una prueba real, con criterio profesional.</p>
-
   </div>
 </section>
 
 
 <!-- ════════════════════════════════════════════════════════
-     SLIDE 6 — CIERRE
+     SLIDE 6 — CIERRE: dynamic with visual effects
      ════════════════════════════════════════════════════════ -->
 <section class="slide s6" id="slide-6">
-  <!-- VIDEO FONDO SLIDE 6: reemplaza src con tu archivo, ej: src="video-s6.mp4" -->
   <video class="vid-bg" autoplay muted loop playsinline>
     <source src="Detalle_Smash_negro_azul.mp4" type="video/mp4">
   </video>
-  <div class="s6-bg"></div>
-  <!-- Imagen de cierre como fondo: descomenta cuando tengas el archivo
-  <img src="image-closing-court.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.13;z-index:0;" />
-  -->
+  <div class="s6-bg-grad"></div>
+  <div class="s6-bg-court">COURT</div>
+  <div class="s6-ring s6-ring-sm"></div>
+  <div class="s6-ring s6-ring-lg"></div>
+  <div class="s6-scan"></div>
   <div class="s6-layout">
     <p class="s6-eyebrow reveal d1">COURT — SMASH PRO</p>
     <h2 class="s6-title reveal d2">Validado donde realmente importa: en cancha</h2>
     <p class="s6-body reveal d3">
-      El SMASH PRO fue desarrollado para ser probado bajo condiciones reales de uso. La retroalimentación de una jugadora profesional nos permitirá evaluar el producto, identificar áreas de mejora y fortalecer el desarrollo de una línea especializada para deportes de cancha.
+      El SMASH PRO fue desarrollado para ser probado bajo condiciones reales. La retroalimentación de una jugadora profesional permitirá evaluar el producto e identificar áreas de mejora.
     </p>
     <div class="s6-claim reveal d4">
       SMASH PRO no compite solo por diseño: compite por resistencia medible, tracción funcional y desempeño real en cancha.
@@ -1239,13 +846,11 @@
      JAVASCRIPT — Controller + Inline Editor
      ════════════════════════════════════════════════════════ -->
 <script>
-  /* ── Presentation Controller ────────────────────────── */
   class Deck {
     constructor() {
-      this.slides = Array.from(document.querySelectorAll('.slide'));
+      this.slides  = Array.from(document.querySelectorAll('.slide'));
       this.total   = this.slides.length;
       this.current = 0;
-
       this.bar     = document.getElementById('progressBar');
       this.counter = document.getElementById('slideCounter');
       this.dots    = document.getElementById('navDots');
@@ -1332,7 +937,6 @@
     }
   }
 
-  /* ── Inline Editor ───────────────────────────────────── */
   class Editor {
     constructor() {
       this.active  = false;
@@ -1361,16 +965,13 @@
     flip() {
       this.active = !this.active;
       document.body.classList.toggle('edit-active', this.active);
-
       const els = document.querySelectorAll(
         '.slide h1,.slide h2,.slide p,.slide li,.slide td,.slide th,.s6-tagline,.s6-eyebrow'
       );
       els.forEach(el => this.active ? el.setAttribute('contenteditable','true') : el.removeAttribute('contenteditable'));
-
       this.toggle.textContent = this.active ? '✓ LISTO' : '✏ EDITAR';
       this.toggle.classList.toggle('active', this.active);
       this.banner.classList.toggle('active', this.active);
-
       if (this.active) {
         this._autoSave = setInterval(() => this._save(), 5000);
       } else {
@@ -1384,7 +985,6 @@
     }
 
     export() {
-      /* Strip edit state so the saved file opens cleanly */
       const editable = Array.from(document.querySelectorAll('[contenteditable]'));
       editable.forEach(el => el.removeAttribute('contenteditable'));
       document.body.classList.remove('edit-active');
@@ -1393,7 +993,6 @@
 
       const html = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
 
-      /* Restore */
       document.body.classList.add('edit-active');
       editable.forEach(el => el.setAttribute('contenteditable','true'));
       this.toggle.classList.add('active');
